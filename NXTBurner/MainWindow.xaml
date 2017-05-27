@@ -1,0 +1,330 @@
+﻿<Controls:MetroWindow x:Class="NXTBurner.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:pie="clr-namespace:PieControls;assembly=PieControls"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+        xmlns:local="clr-namespace:NXTBurner"
+        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        ResizeMode="CanMinimize"
+        ShowMaxRestoreButton="False"
+        BorderThickness="0"
+        WindowTitleBrush="#3f51b5"
+        NonActiveWindowTitleBrush="#3f51b5"
+        TitleCaps="False"
+        TitlebarHeight="32"
+        ShowInTaskbar="True"
+        WindowStartupLocation="CenterScreen"
+        WindowTransitionsEnabled="False"
+        WindowMinButtonStyle="{DynamicResource CleanWindowButtonStyle}"
+        WindowCloseButtonStyle="{DynamicResource CleanWindowButtonStyle}"
+                      
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Title="NXTBurner" Width="1233" Height="679" Loaded="MetroWindow_Loaded">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="115*"/>
+            <ColumnDefinition Width="147*"/>
+        </Grid.ColumnDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="48"/>
+            </Grid.RowDefinitions>
+            <materialDesign:Card Margin="8" Padding="8" VerticalAlignment="Stretch">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="175*"/>
+                        <ColumnDefinition Width="40*"/>
+                        <ColumnDefinition Width="213*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="32*"/>
+                        <RowDefinition Height="32*"/>
+                        <RowDefinition Height="32*"/>
+                        <RowDefinition Height="32*"/>
+                        <RowDefinition Height="32*"/>
+                        <RowDefinition Height="32*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Meta data" Style="{DynamicResource MaterialDesignTitleTextBlock}" Grid.ColumnSpan="3" />
+
+                    <TextBlock Text="Disk ID" VerticalAlignment="Center" Grid.Row="1" />
+                    <Controls:NumericUpDown Name="num_meta_id" HorizontalContentAlignment="Center" TrackMouseWheelWhenMouseOver="True" BorderThickness="0" HideUpDownButtons="True" Value="0" MouseEnter="NumericUpDown_MouseEnter" MouseDown="NumericUpDown_MouseDown" ValueChanged="numChanged" Minimum="0" Interval="1" Maximum="80" Margin="10,0,10,0" Grid.Row="1" Grid.Column="2" />
+
+                    <TextBlock Text="BPM" VerticalAlignment="Center" Grid.Row="2"/>
+                    <Controls:NumericUpDown Name="num_meta_bpm" HorizontalContentAlignment="Center" TrackMouseWheelWhenMouseOver="True" BorderThickness="0" HideUpDownButtons="True" Value="0" MouseEnter="NumericUpDown_MouseEnter" MouseDown="NumericUpDown_MouseDown" ValueChanged="numChanged" Minimum="0" Interval="1" Maximum="728" Margin="10,0,10,0" Grid.Row="2" Grid.Column="2" />
+
+                    <TextBlock Text="Default Octave" VerticalAlignment="Center" Grid.Row="3" />
+                    <TextBlock Text="{Binding ElementName=sli_meta_octave,Path=Value}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="3" />
+                    <Slider x:Name="sli_meta_octave" Margin="8,0,8,0" VerticalAlignment="Center" IsSnapToTickEnabled="True" ClipToBounds="False" Grid.Column="2" Grid.Row="3" />
+
+                    <TextBlock Text="Buffering" VerticalAlignment="Center" Grid.Row="4" />
+                    <Controls:NumericUpDown Name="num_meta_buffer" HorizontalContentAlignment="Center" TrackMouseWheelWhenMouseOver="True" BorderThickness="0" HideUpDownButtons="True" Value="0" MouseEnter="NumericUpDown_MouseEnter" MouseDown="NumericUpDown_MouseDown" ValueChanged="numChanged" Minimum="0" Interval="1" Maximum="80" Margin="10,0,10,0" Grid.Row="4" Grid.Column="2" />
+
+
+
+
+
+                    <Button Name="btn_update_metadata" Content="Set meta data" Click="btn_update_metadata_Click" Grid.Column="2" Grid.Row="5" Height="Auto" />
+                </Grid>
+            </materialDesign:Card>
+
+            <materialDesign:Card Margin="8" Padding="8" Grid.Row="1" VerticalAlignment="Stretch" >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="32*"/>
+                        <RowDefinition Height="32*"/>
+                        <RowDefinition Height="32*"/>
+                        <RowDefinition Height="32*"/>
+                        <RowDefinition Height="32*"/>
+                        <RowDefinition Height="32*"/>
+                        <RowDefinition Height="32*"/>
+                        <RowDefinition Height="32*"/>
+                        <RowDefinition Height="32*"/>
+                        <RowDefinition Height="32*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="128*"/>
+                        <ColumnDefinition Width="128*"/>
+                        <ColumnDefinition Width="128*"/>
+                        <ColumnDefinition Width="128*"/>
+                        <ColumnDefinition Width="128*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Preview" Style="{DynamicResource MaterialDesignTitleTextBlock}" Grid.ColumnSpan="2"/>
+                    <TextBlock Text="Current tone" Style="{DynamicResource MaterialDesignTitleTextBlock}" HorizontalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="2" />
+
+                    <TextBlock Text="Frequency" Margin="0,0,8,0" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Height="16" Width="60" />
+                    <Border Name="rectFrequency" CornerRadius="3" Background="Gray" Margin="0,8,8,8" Grid.Column="0" Grid.Row="2" Grid.RowSpan="2">
+                        <Border.Triggers>
+                            <EventTrigger RoutedEvent="Window.Loaded">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                                             Storyboard.TargetProperty="Opacity"
+                                                             From="0"
+                                                             To="1"
+                                                             Duration="0:0:2"
+                                                             AutoReverse="False">
+                                            <DoubleAnimation.EasingFunction>
+                                                <ExponentialEase EasingMode="EaseOut"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Border.Triggers>
+                    </Border>
+                    <Border Name="rectModifier" CornerRadius="3" Background="Gray" Margin="0,8,8,8" Grid.Column="0" Grid.Row="4" Grid.RowSpan="2">
+                        <Border.Triggers>
+                            <EventTrigger RoutedEvent="Window.Loaded">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                                             Storyboard.TargetProperty="Opacity"
+                                                             From="0"
+                                                             To="1"
+                                                             Duration="0:0:2"
+                                                             AutoReverse="False">
+                                            <DoubleAnimation.EasingFunction>
+                                                <ExponentialEase EasingMode="EaseOut"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Border.Triggers>
+                    </Border>
+                    <TextBlock Text="Modifier" Margin="0,0,8,0" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="6" Height="16" Width="49" />
+
+                    <TextBlock Text="Octave" Margin="0,0,8,0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Height="16" Width="40" />
+                    <Border Name="rectOctave" CornerRadius="3" Background="Gray" Margin="0,8,8,8" Grid.Column="1" Grid.Row="2" Grid.RowSpan="2">
+                        <Border.Triggers>
+                            <EventTrigger RoutedEvent="Window.Loaded">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                                             Storyboard.TargetProperty="Opacity"
+                                                             From="0"
+                                                             To="1"
+                                                             Duration="0:0:2"
+                                                             AutoReverse="False">
+                                            <DoubleAnimation.EasingFunction>
+                                                <ExponentialEase EasingMode="EaseOut"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Border.Triggers>
+                    </Border>
+                    <Border Name="rectDelay" CornerRadius="3" Background="Gray" Margin="0,8,8,8" Grid.Column="1" Grid.Row="4" Grid.RowSpan="2">
+                        <Border.Triggers>
+                            <EventTrigger RoutedEvent="Window.Loaded">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                                             Storyboard.TargetProperty="Opacity"
+                                                             From="0"
+                                                             To="1"
+                                                             Duration="0:0:2"
+                                                             AutoReverse="False">
+                                            <DoubleAnimation.EasingFunction>
+                                                <ExponentialEase EasingMode="EaseOut"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Border.Triggers>
+                    </Border>
+                    <TextBlock Text="Delay" Margin="0,0,8,0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="6" />
+
+                    <TextBlock Text="Alt Modifier" Margin="0,0,8,0" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" />
+                    <Border Name="rectAltModifier" CornerRadius="3" Background="Gray" Margin="0,8,8,8" Grid.Column="2" Grid.Row="2" Grid.RowSpan="2" >
+                        <Border.Triggers>
+                            <EventTrigger RoutedEvent="Window.Loaded">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                                             Storyboard.TargetProperty="Opacity"
+                                                             From="0"
+                                                             To="1"
+                                                             Duration="0:0:2"
+                                                             AutoReverse="False">
+                                            <DoubleAnimation.EasingFunction>
+                                                <ExponentialEase EasingMode="EaseOut"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Border.Triggers>
+                    </Border>
+                    <Border Name="rectDuration" CornerRadius="3" Background="Gray" Margin="0,8,8,8" Grid.Column="2" Grid.Row="4" Grid.RowSpan="2" >
+                        <Border.Triggers>
+                            <EventTrigger RoutedEvent="Window.Loaded">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                                             Storyboard.TargetProperty="Opacity"
+                                                             From="0"
+                                                             To="1"
+                                                             Duration="0:0:2"
+                                                             AutoReverse="False">
+                                            <DoubleAnimation.EasingFunction>
+                                                <ExponentialEase EasingMode="EaseOut"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Border.Triggers>
+                    </Border>
+                    <TextBlock Text="Duration" Margin="0,0,8,0" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="6" Height="16" Width="51" />
+
+                    <!-- Tone information -->
+                    <TextBlock Text="Modifier" Grid.Column="3" Grid.Row="1" VerticalAlignment="Center" />
+                    <TextBlock Text="Frequency" Grid.Column="3" Grid.Row="2" VerticalAlignment="Center" />
+                    <TextBlock Text="Duration" Grid.Column="3" Grid.Row="3" VerticalAlignment="Center" />
+                    <TextBlock Text="Octave" Grid.Column="3" Grid.Row="4" VerticalAlignment="Center" />
+                    <TextBlock Text="Delay" Grid.Column="3" Grid.Row="5" VerticalAlignment="Center" />
+                    <TextBlock Text="Alt Modifier" Grid.Column="3" Grid.Row="6" VerticalAlignment="Center" />
+
+                    <!-- Modifier information -->
+                    <TextBlock Name="txtModifierExplanation" Text="Some information about the modifier" TextWrapping="WrapWithOverflow" VerticalAlignment="Center" Grid.Row="7" Grid.ColumnSpan="4" Margin="0,0,8,0" />
+                    <TextBlock Name="txtAltModifierExplanation" Text="Some information about the alt modifier" TextWrapping="WrapWithOverflow" VerticalAlignment="Center" Grid.Row="8" Grid.ColumnSpan="5" Margin="0,0,8,0" />
+
+                    <Controls:NumericUpDown Name="num_modifier" HorizontalContentAlignment="Center" TrackMouseWheelWhenMouseOver="True" BorderThickness="0" HideUpDownButtons="True" Value="0" MouseEnter="NumericUpDown_MouseEnter" MouseDown="NumericUpDown_MouseDown" ValueChanged="numChanged" Interval="1" Margin="0,0,4,0" Grid.Row="1" Grid.Column="4" />
+                    <Controls:NumericUpDown Name="num_frequency" HorizontalContentAlignment="Center" TrackMouseWheelWhenMouseOver="True" BorderThickness="0" HideUpDownButtons="True" Value="0" MouseEnter="NumericUpDown_MouseEnter" MouseDown="NumericUpDown_MouseDown" ValueChanged="numChanged" Interval="1" Margin="0,0,4,0" Grid.Row="2" Grid.Column="4" />
+                    <Controls:NumericUpDown Name="num_duration" HorizontalContentAlignment="Center" TrackMouseWheelWhenMouseOver="True" BorderThickness="0" HideUpDownButtons="True" Value="0" MouseEnter="NumericUpDown_MouseEnter" MouseDown="NumericUpDown_MouseDown" ValueChanged="numChanged" Interval="1" Margin="0,0,4,0" Grid.Row="3" Grid.Column="4" />
+                    <Controls:NumericUpDown Name="num_octave" HorizontalContentAlignment="Center" TrackMouseWheelWhenMouseOver="True" BorderThickness="0" HideUpDownButtons="True" Value="0" MouseEnter="NumericUpDown_MouseEnter" MouseDown="NumericUpDown_MouseDown" ValueChanged="numChanged" Interval="1" Margin="0,0,4,0" Grid.Row="4" Grid.Column="4" />
+                    <Controls:NumericUpDown Name="num_delay" HorizontalContentAlignment="Center" TrackMouseWheelWhenMouseOver="True" BorderThickness="0" HideUpDownButtons="True" Value="0" MouseEnter="NumericUpDown_MouseEnter" MouseDown="NumericUpDown_MouseDown" ValueChanged="numChanged" Interval="1" Margin="0,0,4,0" Grid.Row="5" Grid.Column="4" />
+                    <Controls:NumericUpDown Name="num_alt_modifier" HorizontalContentAlignment="Center" TrackMouseWheelWhenMouseOver="True" BorderThickness="0" HideUpDownButtons="True" Value="0" MouseEnter="NumericUpDown_MouseEnter" MouseDown="NumericUpDown_MouseDown" ValueChanged="numChanged" Interval="1" Margin="0,0,4,0" Grid.Row="6" Grid.Column="4" />
+
+                    <!-- Buttons 
+                        <Button Name="btn_play" Content="Play Tone" Click="btn_addtone_Click" Height="Auto" Grid.Row="8" />-->
+                    <Button Name="btn_playtone" Content="Play" IsEnabled="False" Click="btn_playtone_Click" Height="Auto" Grid.Row="7" Grid.Column="4" />
+                    <Button Name="btn_removetone" Content="Remove Tone" Click="btn_removetone_Click" Height="Auto" Grid.ColumnSpan="2" Grid.Row="9" />
+                    <Button Name="btn_addtone" Content="Add Tone" Click="btn_addtone_Click" Grid.Column="3" Height="Auto" Grid.ColumnSpan="2" Grid.Row="9" />
+                </Grid>
+            </materialDesign:Card>
+
+            <Grid Grid.Row="2" Margin="8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="btn_print_track" Content="Print Track" Margin="8,0,8,0" Height="Auto" Click="btn_print_track_Click" />
+                <Button x:Name="btn_play_track" IsEnabled="False" Content="Play Track" Height="Auto" Margin="8,0,8,0" Grid.Column="1" Grid.Row="0"  />
+            </Grid>
+        </Grid>
+
+
+        <Grid Grid.Column="1">
+            <!-- When you click [print], everything inside the ChartArea will be printed / saved to a pdf. This "subgrid" is neccessary because of a visual bug that moves the chart outside of the pdf for some reason -->
+            <Grid  Name="ChartArea" Margin="16">
+                <Grid.Resources>
+                    <Style TargetType="lvc:PieSeries">
+                        <Setter Property="Foreground" Value="{x:Null}"></Setter>
+                    </Style>
+                </Grid.Resources>
+
+                <Grid Margin="0">
+                    <Grid.Clip>
+                        <EllipseGeometry RadiusX="320" RadiusY="320" Center="325,310" />
+                    </Grid.Clip>
+                    <lvc:PieChart Name="lc_upper_1" Background="Transparent" DataClick="livechart_DataClick" Series="{Binding placeholder}" LegendLocation="None" DataTooltip="{x:Null}" InnerRadius="265" />
+                </Grid>
+
+                <Grid Margin="40">
+                    <Grid.Clip>
+                        <EllipseGeometry RadiusX="268" RadiusY="268" Center="287,271"  />
+                    </Grid.Clip>
+                    <lvc:PieChart Name="lc_lower_1" Background="Transparent" DataClick="livechart_DataClick" Series="{Binding placeholder}" LegendLocation="None" DataTooltip="{x:Null}" InnerRadius="225"  />
+                </Grid>
+
+                <Grid Margin="80">
+                    <Grid.Clip>
+                        <EllipseGeometry RadiusX="228" RadiusY="228" Center="247,231"  />
+                    </Grid.Clip>
+                    <lvc:PieChart Name="lc_upper_2" Background="Transparent" DataClick="livechart_DataClick" Series="{Binding placeholder}" LegendLocation="None" DataTooltip="{x:Null}" InnerRadius="185"  />
+                </Grid>
+
+                <Grid Margin="120">
+                    <Grid.Clip>
+                        <EllipseGeometry RadiusX="188" RadiusY="188" Center="207,191"  />
+                    </Grid.Clip>
+                    <lvc:PieChart Name="lc_lower_2" Background="Transparent" DataClick="livechart_DataClick" Series="{Binding placeholder}" LegendLocation="None" DataTooltip="{x:Null}" InnerRadius="145"  />
+                </Grid>
+
+                <Grid Margin="160">
+                    <Grid.Clip>
+                        <EllipseGeometry RadiusX="148" RadiusY="148" Center="167,151"  />
+                    </Grid.Clip>
+                    <lvc:PieChart Name="lc_upper_3" Background="Transparent" DataClick="livechart_DataClick" Series="{Binding placeholder}" LegendLocation="None" DataTooltip="{x:Null}" InnerRadius="105"  />
+                </Grid>
+
+                <Grid Margin="200" ClipToBounds="False">
+                    <Grid.Clip>
+                        <EllipseGeometry RadiusX="108" RadiusY="108" Center="127,111" />
+                    </Grid.Clip>
+                    <lvc:PieChart Name="lc_lower_3" Background="Transparent" DataClick="livechart_DataClick" Series="{Binding placeholder}" LegendLocation="None" DataTooltip="{x:Null}" InnerRadius="65"  />
+
+                    <TextBlock Name="labelToneId" Text="0" Style="{DynamicResource MaterialDesignTitleTextBlock}" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="2" Grid.Row="2" Grid.RowSpan="2" />
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</Controls:MetroWindow>
