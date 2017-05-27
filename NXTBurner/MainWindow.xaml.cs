@@ -156,7 +156,7 @@ namespace NXTBurner
 
                 if (result == CommonFileDialogResult.Ok)
                 {
-                    MemoryStream lMemoryStream = new MemoryStream(32768);
+                    MemoryStream lMemoryStream = new MemoryStream(64 * 1024);
                     Package package = Package.Open(lMemoryStream, FileMode.Create);
                     XpsDocument doc = new XpsDocument(package);
                     XpsDocumentWriter writer = XpsDocument.CreateXpsDocumentWriter(doc);
