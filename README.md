@@ -1,15 +1,14 @@
 # NXTBurner
 A tool used to create NXTDisks for the NXTPlayer.
 
-
 ## Screenshot
 
 <img src="screenshots/ScreenshotEmpty.png"/>
 
 ## Installation
-Only Chrome OS devices are supported as the [wallpaper api](https://developer.chrome.com/apps/wallpaper) isn't available on other platforms.
 
-[Click here](https://github.com/CiriousJoker/ShufflePaper/releases/latest) to go to the latest release here on Github.
+[Click here](https://github.com/CiriousJoker/NXTBurner/releases/latest) to go to the latest release here on Github.
+This software itself requires no installation, however to to playback the generated NXTDisks you need the NXTPlayer.
 
 ## Legal
 
