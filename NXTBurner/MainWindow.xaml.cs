@@ -26,12 +26,10 @@ using System.Windows.Xps;
 using PdfSharp;
 using System.Windows.Media.Animation;
 using Microsoft.WindowsAPICodePack.Dialogs;
+using System.Threading;
 
 namespace NXTBurner
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow
     {
         Music mMusic = new Music();
@@ -42,7 +40,6 @@ namespace NXTBurner
         public MainWindow()
         {
             InitializeComponent();
-
 
             sli_meta_octave.Minimum = Tone.OctaveToId.Keys.ToList().Min();
             sli_meta_octave.Maximum = Tone.OctaveToId.Keys.ToList().Max();
@@ -143,21 +140,23 @@ namespace NXTBurner
         {
             if (IsLoaded)
             {
+                btn_print_track.IsEnabled = false;
                 string selectedId = labelToneId.Text;
                 labelToneId.Text = num_meta_id.Value.ToString();
 
-                var dialog = new CommonSaveFileDialog();// CommonOpenFileDialog();
+                var dialog = new CommonSaveFileDialog();
                 dialog.AddToMostRecentlyUsedList = false;
                 dialog.Title = "Where do you want to save the .pdf file?";
+
                 dialog.DefaultFileName = "Disk_" + num_meta_id.Value.ToString() + ".pdf";
                 dialog.DefaultExtension = "pdf";
                 dialog.Filters.Add(new CommonFileDialogFilter("PDF document", "pdf"));
 
                 CommonFileDialogResult result = dialog.ShowDialog();
 
-                if (result == CommonFileDialogResult.Ok )
+                if (result == CommonFileDialogResult.Ok)
                 {
-                    MemoryStream lMemoryStream = new MemoryStream();
+                    MemoryStream lMemoryStream = new MemoryStream(32768);
                     Package package = Package.Open(lMemoryStream, FileMode.Create);
                     XpsDocument doc = new XpsDocument(package);
                     XpsDocumentWriter writer = XpsDocument.CreateXpsDocumentWriter(doc);
@@ -167,9 +166,11 @@ namespace NXTBurner
 
                     var pdfXpsDoc = PdfSharp.Xps.XpsModel.XpsDocument.Open(lMemoryStream);
                     PdfSharp.Xps.XpsConverter.Convert(pdfXpsDoc, dialog.FileName, 0);
+
+                    labelToneId.Text = selectedId;
                 }
 
-                labelToneId.Text = selectedId;
+                btn_print_track.IsEnabled = true;
             }
         }
 

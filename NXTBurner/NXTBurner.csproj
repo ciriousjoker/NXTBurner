@@ -55,10 +55,11 @@
     <ApplicationIcon>ico\appicon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>VisualStudioSignKey.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="LiveCharts, Version=0.9.6.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
@@ -98,15 +99,18 @@
       <HintPath>..\packages\PDFsharp.1.32.3057.0\lib\net20\PdfSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PdfSharp-WPF">
+      <HintPath>.\PdfSharp-WPF.dll</HintPath>
+    </Reference>
     <Reference Include="PdfSharp.Charting, Version=1.32.3057.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
       <HintPath>..\packages\PDFsharp.1.32.3057.0\lib\net20\PdfSharp.Charting.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="PdfSharp.Xps">
-      <HintPath>..\dlls\PdfSharp.Xps.dll</HintPath>
+    <Reference Include="Pdfsharp.Xps">
+      <HintPath>.\Pdfsharp.Xps.dll</HintPath>
     </Reference>
     <Reference Include="PieControls">
-      <HintPath>..\dlls\renamed\PieControls.dll</HintPath>
+      <HintPath>.\PieControls.dll</HintPath>
     </Reference>
     <Reference Include="ReachFramework" />
     <Reference Include="System" />
@@ -177,8 +181,6 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-    <None Include="VisualStudioSignKey.pfx" />
-    <None Include="VisualStudioSignKey.snk" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
