@@ -1,5 +1,5 @@
 # NXTBurner
-A tool used to create NXTDisks for the NXTPlayer.
+A tool used to create NXTDisks for the [NXTPlayer](https://github.com/CiriousJoker/NXTPlayer).
 
 ## Screenshot
 
@@ -8,7 +8,7 @@ A tool used to create NXTDisks for the NXTPlayer.
 ## Installation
 
 [Click here](https://github.com/CiriousJoker/NXTBurner/releases/latest) to go to the latest release here on Github.
-This software itself requires no installation, however to to playback the generated NXTDisks you need the NXTPlayer.
+This software itself requires no installation, however, to playback the generated NXTDisks you need the [NXTPlayer](https://github.com/CiriousJoker/NXTPlayer).
 
 ## Legal
 
